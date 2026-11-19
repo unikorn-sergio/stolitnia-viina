@@ -53,6 +53,28 @@ nav::-webkit-scrollbar{display:none}
 nav button{font-family:var(--sans);font-size:13.5px;font-weight:500;background:none;border:0;padding:8px 12px;border-radius:99px;color:var(--muted);cursor:pointer;white-space:nowrap;transition:background .2s,color .2s}
 nav button:hover{background:var(--grey-soft);color:var(--ink)}
 nav button[aria-current="page"]{background:var(--ink);color:var(--paper)}
+/* ---------- вибір кольору ---------- */
+body{transition:background-color .4s,color .4s}
+.theming *{transition:background-color .45s,border-color .45s,color .45s,fill .45s,stroke .45s!important}
+.themes{position:relative;flex:none}
+.tbtn{width:36px;height:36px;border-radius:50%;border:1px solid var(--rule);background:var(--card);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;transition:transform .3s cubic-bezier(.3,1.5,.5,1),border-color .2s}
+.tbtn:hover,.tbtn[aria-expanded="true"]{transform:rotate(40deg);border-color:var(--ink)}
+.tbtn span{width:20px;height:20px;border-radius:50%;background:conic-gradient(#f2a7a7,#f6c49b,#f3e09a,#b4ddb4,#a5d8ea,#a9bbef,#cdb3ea,#f2a7a7);box-shadow:inset 0 0 0 4px var(--card)}
+.tpop{position:absolute;right:0;top:46px;width:min(312px,calc(100vw - 32px));background:var(--card);border:1px solid var(--rule);border-radius:16px;box-shadow:0 14px 44px rgba(30,20,10,.2);padding:16px 16px 14px;opacity:0;visibility:hidden;transform:translateY(-8px) scale(.97);transform-origin:top right;transition:opacity .22s,transform .22s,visibility 0s .22s;z-index:40}
+.tpop.on{opacity:1;visibility:visible;transform:none;transition:opacity .22s,transform .22s}
+.tp-h{font-size:19px;margin-bottom:10px}
+.tp-l{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px}
+.tp-base{display:flex;gap:8px}
+.tp-base button{flex:1;display:flex;align-items:center;gap:8px;font-family:var(--sans);font-size:13px;border:1px solid var(--rule);border-radius:10px;padding:8px 10px;background:var(--paper);color:var(--ink);cursor:pointer}
+.tp-base button[aria-checked="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.tp-base b{width:16px;height:16px;border-radius:50%;flex:none;border:1px solid rgba(0,0,0,.18)}
+.tp-sw{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.sw{aspect-ratio:1;width:100%;border-radius:50%;border:1px solid rgba(0,0,0,.1);cursor:pointer;position:relative;padding:0;transition:transform .18s cubic-bezier(.3,1.6,.5,1),box-shadow .2s}
+.sw:hover,.sw:focus-visible{transform:scale(1.15);outline:none}
+.sw i{position:absolute;inset:32%;border-radius:50%;transition:inset .25s}
+.sw[aria-checked="true"]{box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--ink)}
+.sw[aria-checked="true"] i{inset:24%}
+.tp-name{font-family:var(--sans);font-size:12.5px;color:var(--muted);margin-top:12px;min-height:18px}
 .saved{font-family:var(--sans);font-size:12px;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:6px}
 .saved i{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;transition:background .3s}
 .saved.pending i{background:var(--gold)}
@@ -257,6 +279,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 24px 40px;font-family:var(--sans
   .bar-in{padding:8px 16px;gap:10px}
   .brand{display:none}
   .saved span{display:none}
+  .tpop{right:-40px}
   main{padding:24px 16px 80px}
   .hero h1{font-size:34px}
   .vh h2{font-size:30px}
@@ -271,12 +294,57 @@ footer{max-width:1180px;margin:0 auto;padding:0 24px 40px;font-family:var(--sans
   *,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 @media print{
-  .bar,.modes,.btn,.toast,footer{display:none!important}
+  .bar,.modes,.btn,.toast,footer,.themes{display:none!important}
   .view{display:block!important}
   body{background:#fff}
   .doc{max-height:none}
 }
 </style>
+<script>
+/* Теми сторінки. «Пергамент» — типова, іде за системною світлою/темною; «Нічна» — темна завжди;
+   сім кольорів веселки в пастельному і світлому тонах. Контраст тексту в усіх — не нижче 5,2:1 (WCAG AA).
+   Вибір — лише зручність цього браузера: localStorage, з try/catch. */
+(function(){
+  /* [назва, відтінок, поправка світлості акценту, надбавка насиченості поверхонь] */
+  var H = [['червоний',0,0,0],['помаранчевий',26,-4,12],['жовтий',48,-11,38],['зелений',135,-10,0],['блакитний',195,-7,6],['синій',225,0,0],['фіолетовий',275,0,0]];
+  var T = {
+    'пастельний': {paper:[40,92], card:[55,97.5], ink:[30,14], muted:[14,36], accent:[50,34], soft:[50,86], rule:[28,80], rule2:[30,87], grey:[25,88]},
+    'світлий':    {paper:[55,97], card:[40,99.5], ink:[25,13], muted:[12,38], accent:[60,36], soft:[65,92], rule:[35,87], rule2:[40,92], grey:[30,92]}
+  };
+  var list = [];
+  Object.keys(T).forEach(function(tone){
+    H.forEach(function(x){
+      var v = T[tone], hue = x[1];
+      function c(p, dl, sb){ return 'hsl(' + hue + ' ' + Math.min(100, p[0] + (sb || 0)) + '% ' + (p[1] + (dl || 0)) + '%)'; }
+      var sb = x[3];
+      list.push({id: tone + '-' + x[0], name: x[0], tone: tone, vars: {
+        '--paper': c(v.paper, 0, sb), '--card': c(v.card, 0, sb), '--ink': c(v.ink), '--muted': c(v.muted),
+        '--rule': c(v.rule, 0, sb), '--rule2': c(v.rule2, 0, sb), '--accent': c(v.accent, x[2]),
+        '--accent-soft': c(v.soft, 0, sb), '--grey-soft': c(v.grey, 0, sb)}});
+    });
+  });
+  var KEYS = ['--paper','--card','--ink','--muted','--rule','--rule2','--accent','--accent-soft','--grey-soft'];
+  window.THEMES = list;
+  window.applyTheme = function(id, keep){
+    var r = document.documentElement;
+    KEYS.forEach(function(k){ r.style.removeProperty(k); });
+    r.removeAttribute('data-theme');
+    var t = null;
+    if (id === 'night') r.setAttribute('data-theme', 'dark');
+    else {
+      for (var i = 0; i < list.length; i++) if (list[i].id === id) t = list[i];
+      if (t){ r.setAttribute('data-theme', 'light'); for (var k in t.vars) r.style.setProperty(k, t.vars[k]); }
+      else id = 'parchment';
+    }
+    window.__theme = id;
+    if (!keep) try { localStorage.setItem('stolitnia-viina:theme', id); } catch(e){}
+    return id;
+  };
+  var saved = null;
+  try { saved = localStorage.getItem('stolitnia-viina:theme'); } catch(e){}
+  window.applyTheme(saved || 'parchment', true);
+})();
+</script>
 </head>
 <body>
 <div class="bar"><div class="bar-in">
@@ -289,6 +357,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 24px 40px;font-family:var(--sans
     <button data-go="tablytsia">Таблиця ознак</button>
     <button data-go="zdaty">Здати</button>
   </nav>
+  <div class="themes"><button class="tbtn" id="tbtn" aria-haspopup="true" aria-expanded="false" title="Колір сторінки" aria-label="Колір сторінки"><span></span></button><div class="tpop" id="tpop" role="menu" aria-label="Колір сторінки"></div></div>
   <div class="saved" id="saved"><i></i><span>збережено в цьому браузері</span></div>
 </div></div>
 
@@ -751,6 +820,50 @@ function renderAll(){
   syncChecks(); markCompletion(); refreshStats(); indicator();
 }
 $('#foot').innerHTML = `Керівник: ${esc(M['керівник'])}. Цитати Блока — за українським перекладом В. Шовкуна (Київ, 2001), у межах права цитування; повний текст — в «Ізборнику». Переклади Венетта й Фруассара зроблено для цього дослідження з оригіналів у суспільному надбанні.`;
+/* ---------- вибір кольору ---------- */
+function themeName(id){
+  if (id === 'night') return 'Нічна';
+  if (id === 'parchment') return 'Пергамент · іде за темною темою системи';
+  const t = THEMES.find(x => x.id === id);
+  return t ? (t.tone[0].toUpperCase() + t.tone.slice(1)) + ' · ' + t.name : '';
+}
+function renderThemes(){
+  const pop = $('#tpop'), btn = $('#tbtn');
+  const sw = tone => THEMES.filter(t => t.tone === tone).map(t =>
+    `<button class="sw" role="menuitemradio" data-t="${t.id}" aria-label="${esc(themeName(t.id))}" title="${esc(t.name)}" style="background:${t.vars['--accent-soft']}"><i style="background:${t.vars['--accent']}"></i></button>`).join('');
+  pop.innerHTML = `<div class="tp-h">Колір сторінки</div>
+    <div class="tp-base">
+      <button role="menuitemradio" data-t="parchment"><b style="background:#f6f1e7"></b>Пергамент</button>
+      <button role="menuitemradio" data-t="night"><b style="background:#25211b"></b>Нічна</button>
+    </div>
+    <div class="tp-l">Пастельні</div><div class="tp-sw">${sw('пастельний')}</div>
+    <div class="tp-l">Світлі</div><div class="tp-sw">${sw('світлий')}</div>
+    <div class="tp-name" id="tp-name"></div>`;
+  const mark = () => {
+    $$('[data-t]', pop).forEach(b => b.setAttribute('aria-checked', b.dataset.t === window.__theme));
+    $('#tp-name').textContent = themeName(window.__theme);
+  };
+  $$('[data-t]', pop).forEach(b => {
+    b.addEventListener('click', () => {
+      document.documentElement.classList.add('theming');
+      applyTheme(b.dataset.t); mark();
+      clearTimeout(renderThemes._t);
+      renderThemes._t = setTimeout(() => document.documentElement.classList.remove('theming'), 550);
+    });
+    b.addEventListener('mouseenter', () => { $('#tp-name').textContent = themeName(b.dataset.t); });
+    b.addEventListener('mouseleave', () => { $('#tp-name').textContent = themeName(window.__theme); });
+  });
+  const open = on => {
+    pop.classList.toggle('on', on); btn.setAttribute('aria-expanded', on);
+    if (on){ mark(); const cur = $(`[data-t="${window.__theme}"]`, pop); if (cur) cur.focus({preventScroll:true}); }
+  };
+  btn.addEventListener('click', e => { e.stopPropagation(); open(!pop.classList.contains('on')); });
+  pop.addEventListener('click', e => e.stopPropagation());
+  document.addEventListener('click', () => open(false));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && pop.classList.contains('on')){ open(false); btn.focus(); } });
+  mark();
+}
+renderThemes();
 load(); renderAll(); show();
 })();
 </script>
