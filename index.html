@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Столітня війна і суспільство</title>
+<meta name="description" content="Читалка дослідження: Столітня війна і зміни європейського суспільства за ознаками Марка Блока">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%238c2f1e'/%3E%3Ctext x='16' y='23' font-family='Georgia' font-size='20' text-anchor='middle' fill='%23fffdf8'%3EБ%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#f6f1e7; --card:#fffdf8; --ink:#2a241d; --muted:#6f6455; --rule:#dcd2bf; --rule2:#e9e1d2;
+  --accent:#8c2f1e; --accent-soft:#f3e2da; --gold:#a57a2a; --gold-soft:#f4ead3;
+  --blue:#2f4f6f; --blue-soft:#e3eaf1; --green:#3f6b45; --green-soft:#e3eee2; --grey-soft:#ebe7df;
+  --serif:"EB Garamond",Georgia,"Times New Roman",serif;
+  --sans:Inter,"Segoe UI",Arial,sans-serif;
+  --shadow:0 1px 2px rgba(60,40,20,.06),0 6px 18px rgba(60,40,20,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#1c1915; --card:#25211b; --ink:#ece4d6; --muted:#a99d8a; --rule:#3d362c; --rule2:#322d25;
+    --accent:#e08a72; --accent-soft:#3a2520; --gold:#d9b46a; --gold-soft:#352d1d;
+    --blue:#9cbbd8; --blue-soft:#1f2a35; --green:#9ccaa0; --green-soft:#1f2c21; --grey-soft:#2d2922;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#1c1915; --card:#25211b; --ink:#ece4d6; --muted:#a99d8a; --rule:#3d362c; --rule2:#322d25;
+  --accent:#e08a72; --accent-soft:#3a2520; --gold:#d9b46a; --gold-soft:#352d1d;
+  --blue:#9cbbd8; --blue-soft:#1f2a35; --green:#9ccaa0; --green-soft:#1f2c21; --grey-soft:#2d2922;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:84px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:19px;line-height:1.55}
+a{color:var(--blue)}
+button{font:inherit;color:inherit}
+h1,h2,h3,h4{font-weight:500;line-height:1.2;margin:0}
+p{margin:0 0 12px}
+.kicker{font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.small{font-size:16px}
+
+/* ---------- верхня смуга ---------- */
+.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.bar-in{max-width:1180px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:18px}
+.brand{font-size:19px;font-weight:500;white-space:nowrap;cursor:pointer;background:none;border:0;padding:0}
+.brand b{color:var(--accent);font-weight:600}
+nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1}
+nav::-webkit-scrollbar{display:none}
+nav button{font-family:var(--sans);font-size:13.5px;font-weight:500;background:none;border:0;padding:8px 12px;border-radius:99px;color:var(--muted);cursor:pointer;white-space:nowrap;transition:background .2s,color .2s}
+nav button:hover{background:var(--grey-soft);color:var(--ink)}
+nav button[aria-current="page"]{background:var(--ink);color:var(--paper)}
+.saved{font-family:var(--sans);font-size:12px;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:6px}
+.saved i{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;transition:background .3s}
+.saved.pending i{background:var(--gold)}
+.saved.fail i{background:var(--accent)}
+
+main{max-width:1180px;margin:0 auto;padding:36px 24px 100px}
+.view{display:none;animation:fadein .35s ease}
+.view.on{display:block}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.narrow{max-width:860px;margin:0 auto}
+.vh{margin-bottom:26px}
+.vh h2{font-size:38px;margin:6px 0 10px}
+.vh p{font-size:20px;color:var(--muted);max-width:760px}
+
+/* ---------- маршрут ---------- */
+.hero{display:grid;grid-template-columns:1.35fr 1fr;gap:28px;align-items:start}
+.hero h1{font-size:46px;letter-spacing:-.01em;margin:10px 0 8px}
+.hero .sub{font-size:22px;font-style:italic;color:var(--muted)}
+.hero .lead{margin-top:22px;font-size:20px}
+.qcard{margin-top:24px;background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--accent);border-radius:12px;padding:22px 26px;box-shadow:var(--shadow)}
+.qcard p{font-size:24px;line-height:1.35;margin:8px 0 0}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:34px 0 10px}
+.step{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:16px 16px 18px;position:relative;opacity:.7}
+.step.now{opacity:1;border-color:var(--accent);box-shadow:var(--shadow)}
+.step .num{font-family:var(--sans);font-weight:600;font-size:13px;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--rule);color:var(--muted);margin-bottom:10px}
+.step.now .num{background:var(--accent);border-color:var(--accent);color:var(--card)}
+.step h3{font-size:20px;margin-bottom:4px}
+.step p{font-size:16px;color:var(--muted);margin:0}
+.step .st{position:absolute;top:16px;right:14px;font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.step.now .st{color:var(--accent)}
+.side{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+.how{counter-reset:h;list-style:none;padding:0;margin:14px 0 0}
+.how li{counter-increment:h;position:relative;padding:0 0 12px 38px;font-size:17px}
+.how li:before{content:counter(h);position:absolute;left:0;top:1px;width:26px;height:26px;border-radius:50%;background:var(--grey-soft);font-family:var(--sans);font-size:12.5px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.stat{background:var(--grey-soft);border-radius:10px;padding:12px 14px}
+.stat b{display:block;font-family:var(--sans);font-size:24px;font-weight:600}
+.stat span{font-family:var(--sans);font-size:12px;color:var(--muted)}
+.btn{font-family:var(--sans);font-size:14px;font-weight:500;border:1px solid var(--rule);background:var(--card);padding:10px 16px;border-radius:10px;cursor:pointer;transition:transform .15s,background .2s,border-color .2s;display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink)}
+.btn:hover{border-color:var(--ink)}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--card)}
+.btn.primary:hover{filter:brightness(1.07)}
+.btn.ghost{background:none}
+.btn.danger{color:var(--accent);border-color:var(--accent)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+/* ---------- чек-лист ---------- */
+.cl-wrap{display:grid;grid-template-columns:260px 1fr;gap:34px;align-items:start}
+.ringbox{position:sticky;top:96px;background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:26px 22px;text-align:center;box-shadow:var(--shadow);overflow:hidden}
+.ring{position:relative;width:170px;height:170px;margin:0 auto 12px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:10}
+.ring .bg{stroke:var(--grey-soft)}
+.ring .fg{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1),stroke .4s}
+.ring.full .fg{stroke:var(--green)}
+.ring .lbl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .lbl b{font-family:var(--sans);font-size:38px;font-weight:600;line-height:1}
+.ring .lbl span{font-family:var(--sans);font-size:12px;color:var(--muted);margin-top:4px}
+.ringbox .sub{font-family:var(--sans);font-size:13px;color:var(--muted)}
+.banner{margin-top:14px;font-family:var(--sans);font-size:13.5px;font-weight:500;color:var(--green);background:var(--green-soft);border-radius:10px;padding:0 12px;max-height:0;opacity:0;transition:max-height .5s,opacity .5s,padding .5s}
+.banner.on{max-height:80px;opacity:1;padding:10px 12px}
+.group{margin-bottom:26px}
+.group h3{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.group h3 em{font-style:normal;font-weight:500;letter-spacing:0;text-transform:none;background:var(--grey-soft);border-radius:99px;padding:1px 8px}
+.cl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.ci{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;transition:background .35s,border-color .35s,transform .25s}
+.ci:hover{border-color:var(--muted)}
+.ci.done{background:var(--green-soft);border-color:transparent}
+.cb{flex:none;width:28px;height:28px;padding:0;border:0;background:none;cursor:pointer;margin-top:1px}
+.cb svg{width:28px;height:28px;display:block}
+.cb rect{fill:var(--card);stroke:var(--muted);stroke-width:1.6;transition:fill .3s,stroke .3s}
+.cb path{fill:none;stroke:var(--card);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:22;stroke-dashoffset:22;transition:stroke-dashoffset .45s .08s cubic-bezier(.65,0,.35,1)}
+.ci.done .cb rect{fill:var(--green);stroke:var(--green)}
+.ci.done .cb path{stroke-dashoffset:0}
+.ci.pop .cb{animation:pop .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.28)}100%{transform:scale(1)}}
+.ct{flex:1;min-width:0}
+.ct .t{display:inline;font-size:18px;background-image:linear-gradient(var(--green),var(--green));background-repeat:no-repeat;background-position:0 58%;background-size:0 1.5px;transition:background-size .55s cubic-bezier(.65,0,.35,1),color .4s}
+.ci.done .ct .t{background-size:100% 1.5px;color:var(--muted)}
+.ct .w{display:block;font-family:var(--sans);font-size:12.5px;color:var(--muted);margin-top:4px}
+.ct .w a{font-weight:500}
+.weight{flex:none;font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:var(--grey-soft);color:var(--muted);margin-top:3px}
+.weight.req{background:var(--accent-soft);color:var(--accent)}
+.spark{position:absolute;width:8px;height:8px;border-radius:2px;pointer-events:none;animation:spark 1.1s ease-out forwards}
+@keyframes spark{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(260deg);opacity:0}}
+.mini .ci{padding:10px 12px}
+.mini .ct .t{font-size:16.5px}
+
+/* ---------- цитати Блока ---------- */
+.intro p{font-size:19px}
+.quote{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:28px 30px 24px;margin:0 0 22px;box-shadow:var(--shadow);position:relative}
+.quote.complete{border-color:var(--green)}
+.quote .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.quote h3{font-size:27px;margin:4px 0 14px}
+.qtext{margin:0 0 14px;padding:4px 0 4px 22px;border-left:3px solid var(--gold);font-size:21px;line-height:1.5}
+.qtext:before{content:"«";color:var(--gold);font-size:30px;line-height:0;vertical-align:-6px;margin-right:2px}
+.qtext:after{content:"»";color:var(--gold);font-size:30px;line-height:0;vertical-align:-6px;margin-left:2px}
+.src{font-family:var(--sans);font-size:12.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-bottom:6px}
+.src a{font-weight:500;text-decoration:none;border-bottom:1px solid currentColor}
+.note{background:var(--gold-soft);border-radius:10px;padding:12px 16px;font-size:17.5px;margin:12px 0 4px}
+.done-mark{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--green);opacity:0;transition:opacity .4s}
+.quote.complete .done-mark{opacity:1}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 26px}
+.toc a{font-family:var(--sans);font-size:13px;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--rule);border-radius:99px;padding:5px 12px;display:inline-flex;gap:6px;align-items:center}
+.toc a i{width:7px;height:7px;border-radius:50%;background:var(--rule);transition:background .3s}
+.toc a.complete i{background:var(--green)}
+
+/* ---------- поля ---------- */
+.field{margin-top:16px}
+.field label{display:block;font-size:18px;margin-bottom:8px}
+.field label .fid{font-family:var(--sans);font-size:11px;color:var(--muted);margin-right:6px}
+textarea{width:100%;min-height:88px;resize:vertical;font-family:var(--serif);font-size:18.5px;line-height:1.5;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:12px 14px;transition:border-color .2s,box-shadow .2s,background .2s;overflow:hidden}
+textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft);background:var(--card)}
+.field.filled textarea{border-color:color-mix(in srgb,var(--green) 55%,var(--rule))}
+textarea::placeholder{color:var(--muted);opacity:.7;font-style:italic}
+
+/* ---------- свідки ---------- */
+.modes{display:inline-flex;background:var(--grey-soft);border-radius:99px;padding:3px;margin-bottom:18px}
+.modes button{border:0;background:none;padding:7px 16px;border-radius:99px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;color:var(--muted)}
+.modes button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+.pairv{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.pairv.one{grid-template-columns:1fr;max-width:820px;margin:0 auto}
+.pairv.one .doc.hide{display:none}
+.doc{background:var(--card);border:1px solid var(--rule);border-radius:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;max-height:82vh;overflow:hidden}
+.pairv.one .doc{max-height:none}
+.doc-h{padding:22px 26px 14px;border-bottom:1px solid var(--rule2)}
+.doc-h .a{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.doc-h h3{font-size:26px;margin:4px 0 2px}
+.doc-h .s{font-style:italic;color:var(--muted)}
+.doc-b{padding:10px 26px 26px;overflow-y:auto}
+.doc-b h4{font-size:22px;margin:22px 0 8px}
+.doc-b p{font-size:18.5px}
+.doc-b p.ref{font-family:var(--sans);font-size:12.5px;color:var(--muted);margin-top:-4px}
+.doc-b blockquote{margin:12px 0;padding:8px 14px;border-left:3px solid var(--rule);color:var(--muted);font-size:17px}
+details{border:1px solid var(--rule2);border-radius:10px;margin:12px 0;background:var(--paper)}
+summary{cursor:pointer;padding:10px 14px;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--muted);list-style:none;display:flex;justify-content:space-between}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";font-size:16px;transition:transform .25s}
+details[open] summary:after{transform:rotate(45deg)}
+details > div{padding:2px 16px 14px;font-size:16.5px}
+details .titul p{font-size:15.5px;margin-bottom:8px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15.5px;margin:8px 0}
+th,td{border-bottom:1px solid var(--rule2);padding:7px 8px;text-align:left;vertical-align:top}
+th{font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.04em;color:var(--muted)}
+code{font-family:Consolas,monospace;font-size:.85em;background:var(--grey-soft);padding:1px 5px;border-radius:4px}
+.compare{margin-top:34px}
+.cq{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:22px 24px;margin-bottom:16px;box-shadow:var(--shadow)}
+.cq h3{font-size:24px}
+.cq > p{color:var(--muted);margin:4px 0 0}
+.cq .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cq .field label{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+
+/* ---------- таблиця ознак ---------- */
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.legend span{font-family:var(--sans);font-size:12.5px;padding:5px 11px;border-radius:99px;background:var(--card);border:1px solid var(--rule);display:inline-flex;align-items:center;gap:7px}
+.legend i{width:9px;height:9px;border-radius:50%}
+.feat{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:20px 24px 22px;margin-bottom:16px;box-shadow:var(--shadow)}
+.feat.legacy{background:var(--gold-soft)}
+.feat-h{display:flex;align-items:center;gap:14px;margin-bottom:4px}
+.feat-h .n{flex:none;width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--card);font-family:var(--sans);font-weight:600;display:flex;align-items:center;justify-content:center}
+.feat.legacy .feat-h .n{background:var(--gold)}
+.feat-h h3{font-size:24px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px 18px}
+.fgrid .field label{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.later{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:16px;font-family:var(--sans);font-size:12.5px;color:var(--muted)}
+.later i{font-style:normal;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:11px;margin-right:2px}
+.later span{border:1.5px dashed var(--rule);border-radius:99px;padding:4px 11px}
+.later b{font-weight:600}
+.locked{border:1.5px dashed var(--rule);border-radius:10px;min-height:88px;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:12.5px;color:var(--muted);text-align:center;padding:10px}
+.roles{display:flex;flex-wrap:wrap;gap:6px}
+.roles button{font-family:var(--sans);font-size:12.5px;border:1px solid var(--rule);background:var(--paper);border-radius:99px;padding:6px 11px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .2s}
+.roles button i{width:8px;height:8px;border-radius:50%}
+.roles button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* ---------- здати ---------- */
+.zgrid{display:grid;grid-template-columns:1.2fr 1fr;gap:26px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:24px;box-shadow:var(--shadow)}
+.panel h3{font-size:24px;margin-bottom:8px}
+.meter{height:10px;background:var(--grey-soft);border-radius:99px;overflow:hidden;margin:8px 0 4px}
+.meter i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.mrow{font-family:var(--sans);font-size:13px;color:var(--muted);display:flex;justify-content:space-between;margin-top:14px}
+pre.md{white-space:pre-wrap;font-family:Consolas,monospace;font-size:13px;line-height:1.5;background:var(--paper);border:1px solid var(--rule2);border-radius:10px;padding:14px;max-height:420px;overflow:auto;margin:0}
+.privacy{font-size:16px;background:var(--blue-soft);border-radius:10px;padding:12px 16px;margin-top:16px}
+.confirm{display:none;gap:8px;align-items:center;font-family:var(--sans);font-size:13px}
+.confirm.on{display:inline-flex}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:14px;padding:10px 18px;border-radius:99px;opacity:0;transition:all .35s;pointer-events:none;z-index:50}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+footer{max-width:1180px;margin:0 auto;padding:0 24px 40px;font-family:var(--sans);font-size:12.5px;color:var(--muted)}
+
+@media (max-width:980px){
+  .hero,.cl-wrap,.zgrid{grid-template-columns:1fr}
+  .ringbox{position:static}
+  .steps{grid-template-columns:1fr 1fr}
+  .pairv{grid-template-columns:1fr}
+  .doc{max-height:none}
+}
+@media (max-width:640px){
+  body{font-size:18px}
+  .bar-in{padding:8px 16px;gap:10px}
+  .brand{display:none}
+  .saved span{display:none}
+  main{padding:24px 16px 80px}
+  .hero h1{font-size:34px}
+  .vh h2{font-size:30px}
+  .steps{grid-template-columns:1fr}
+  .quote{padding:22px 18px 18px}
+  .qtext{font-size:19px;padding-left:14px}
+  .cq .two{grid-template-columns:1fr}
+  .doc-h,.doc-b{padding-left:18px;padding-right:18px}
+  .feat{padding:18px 16px}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+@media print{
+  .bar,.modes,.btn,.toast,footer{display:none!important}
+  .view{display:block!important}
+  body{background:#fff}
+  .doc{max-height:none}
+}
+</style>
+</head>
+<body>
+<div class="bar"><div class="bar-in">
+  <button class="brand" data-go="marshrut"><b>Блок</b> · Столітня війна</button>
+  <nav id="nav">
+    <button data-go="marshrut">Маршрут</button>
+    <button data-go="cheklyst">Чек-лист</button>
+    <button data-go="blok">Блок</button>
+    <button data-go="svidky">Два свідки</button>
+    <button data-go="tablytsia">Таблиця ознак</button>
+    <button data-go="zdaty">Здати</button>
+  </nav>
+  <div class="saved" id="saved"><i></i><span>збережено в цьому браузері</span></div>
+</div></div>
+
+<main>
+  <section class="view" id="v-marshrut"></section>
+  <section class="view" id="v-cheklyst"></section>
+  <section class="view" id="v-blok"></section>
+  <section class="view" id="v-svidky"></section>
+  <section class="view" id="v-tablytsia"></section>
+  <section class="view" id="v-zdaty"></section>
+</main>
+<footer id="foot"></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const DATA = {"мета":{"етап":1,"назва":"Столітня війна і зміни європейського суспільства","підзаголовок":"1337–1453 · дослідження за ознаками Марка Блока","керівник":"С. С. Корнієнко, кафедра історії КДПУ","ізборник":"http://litopys.org.ua/bloch/"},"маршрут":[{"n":1,"назва":"Блок і суспільство","мета":"Мати мірку — і побачити суспільство початку війни очима двох сучасників."},{"n":2,"назва":"Війна як механізм","мета":"Показати, як саме діяли військо, податок, викуп і спустошення."},{"n":3,"назва":"Чи це війна?","мета":"Відокремити війну від Чорної смерті й від того, що почалося раніше."},{"n":4,"назва":"Висновок і форма","мета":"Сформулювати висновок як розподіл ознак."}],"чек":[{"id":"б448","назва":"Блок. «Фундаментальні характеристики європейського феодалізму»","де":"с. 448–453","куди":"blo09","вага":"обов'язково"},{"id":"б454","назва":"Блок. «Пережитки й відродження»","де":"с. 454–457","куди":"blo09","вага":"обов'язково"},{"id":"б457","назва":"Блок. «Ідея війни й ідея договору»","де":"с. 457–458","куди":"blo09","вага":"обов'язково"},{"id":"б16","назва":"Блок. Вступ, «Загальний напрямок даного дослідження»","де":"с. 16","куди":"blo01","вага":"обов'язково"},{"id":"б74","назва":"Блок. «Дві феодальні доби»","де":"с. 74–75","куди":"blo03","вага":"обов'язково"},{"id":"венетт","назва":"Жан де Венетт. Хроніка, 1356 і 1358","де":"у читалці","куди":"#svidky","вага":"обов'язково"},{"id":"фруассар","назва":"Жан Фруассар. Хроніки, книга I, § 413","де":"у читалці","куди":"#svidky","вага":"обов'язково"},{"id":"балух5","назва":"Балух В. О., Коцур В. П. Історія середніх віків. Т. 2. Лекція 5 «Франція в XIV–XV ст.»","де":"бібліотека","куди":"—","вага":"обов'язково"},{"id":"б84","назва":"Блок. «Економічна революція другої феодальної доби»","де":"с. 84–87","куди":"blo03","вага":"бажано"},{"id":"б441","назва":"Блок. «Національності»","де":"с. 441–446","куди":"blo08","вага":"бажано"},{"id":"б335","назва":"Блок. «Конституювання нащадків рицарів у привілейований клас», «Право аристократів», «Англійський виняток»","де":"с. 335–342","куди":"blo07","вага":"за бажанням"}],"блок":{"вступ":["Блок писав про IX — початок XIII ст., тож про Столітню війну він майже нічого не каже.","Він потрібен нам для іншого: дає мірку, тобто перелік ознак, за якими можна виміряти, що змінилося.","Нижче наведено короткі цитати з українського перекладу; повний текст розділу відкривається кнопкою біля кожної.","Порядок навмисно не книжковий: спершу мірка, потім рамка, потім подробиці."],"цитати":[{"id":"мірка","назва":"Мірка: шість ознак","стор":"452","файл":"blo09","текст":"Підлеглість селянина; замість заробітної платні, загалом неможливої, широке застосування служби, оплачуваної орендним наділом, який і був, у точному розумінні, феодом; верховенство класу професійних воїнів; зв’язки покори та протекції, які прив’язували людину до людини і в цьому класі воїнів набували особливо чистої форми васальної залежності; подрібнення влади — головна причина безладу; але всередині всього цього виживання й інших способів гуртуватися, збереження зв’язків кревної спорідненості та держави, причому цій останній судилося, протягом другої феодальної ери, набути нової снаги: ось такими видаються нам фундаментальні характеристики європейського феодалізму.","примітка":["Це найважливіша цитата всього дослідження. Шість ознак із неї — рядки таблиці ознак."],"питання":[{"id":"мірка-1","текст":"Яку з шести ознак Блок пов'язує з війною та військом прямо? Підказка: с. 449–450, важка кіннота."},{"id":"мірка-2","текст":"Чому шоста ознака — держава — стоїть у переліку, хоч вона не феодальна? Що це означає для тези «централізована держава перемогла феодалізм»?"}]},{"id":"умови","назва":"Умови, без яких цього суспільства не було б","стор":"449","файл":"blo09","текст":"Воно передбачало глибоке уповільнення ритму життя, опертого на людські взаємини, зниження грошового обігу до межі, що внеможливлювала існування системи грошової оплати послуг, ментальність, прив’язану до відчутного та близького. Коли ці умови почали змінюватися, час феодального суспільства почав відходити.","примітка":[],"питання":[{"id":"умови-1","текст":"Випишіть умови, які називає Блок. Котра з них стосується грошей і що з нею сталося до XIV ст.?"}]},{"id":"неповнота","назва":"Ніде не повністю","стор":"451","файл":"blo09","текст":"Мабуть, важливо також відзначити, що феодальна Європа не була вся феодалізована ні до однакової міри, ні в одному й тому самому ритмі, а передусім, вона ніде не була феодалізована повністю.","примітка":[],"питання":[{"id":"неповнота-1","текст":"Що з цього випливає для слів «класична феодальна роздробленість» у першій редакції тез?"}]},{"id":"кінець","назва":"Коли скінчився феодальний тип","стор":"454","файл":"blo09","текст":"У середині тринадцятого сторіччя європейські суспільства остаточно відійшли від феодального типу. Але, з огляду на те що еволюція неодмінно триває у середовищі окремих груп, наділених історичною пам’яттю, жодна соціальна система ані вмирає повністю, ані зникає вмить. Феодалізм мав свої продовження.","примітка":["Тези кажуть: війна «остаточно зруйнувала» феодальну роздробленість. Блок каже: тип зник ще в середині XIII ст. Між цими двома «остаточно» вісімдесят років."],"питання":[{"id":"кінець-1","текст":"Якщо феодального типу у 1337 р. вже не було, що тоді може означати «трансформація феодальних суспільств» у 1337–1453 рр.? Запропонуйте своє формулювання."}]},{"id":"ліврея","назва":"Почти в чужих кольорах","стор":"455","файл":"blo09","текст":"Більш ефективною — і більш небезпечною — виявилася, під час безладу, який панував наприкінці ери середніх віків, практика відновлення дружин приватних воїнів, дуже подібних до васалів-«сателітів», чий розбій затаврували автори меровінзької ери. Часто вони виражали свою підлеглість тим, що носили костюм, який мав кольори їхнього військового сеньйора або на якому був нашитий його герб.","примітка":[],"питання":[{"id":"ліврея-1","текст":"Що це — повернення феодалізму чи щось нове під старою формою? До якої з шести ознак це належить?"},{"id":"ліврея-2","текст":"Блок не пов'язує ці почти зі Столітньою війною. Що треба було б знайти в літературі про війну, щоб такий зв'язок довести?"}]},{"id":"варенн","назва":"Варенн, близько 1380 року","стор":"457","файл":"blo09","текст":"Аристократи не повинні сплачувати «відріз», повідомляють нам близько 1380 р. двоє молодих дворян із Варен-ан-Арґона; бо «люди шляхетні мусять ризикувати своїм життям і своїми кіньми у війнах».","примітка":["«Відріз» — так перекладач передає французьке taille, тобто талью, прямий податок."],"питання":[{"id":"варенн-1","текст":"Що насправді захищають ці дворяни: що знать воює, бо вона знать, чи що вона не платить, бо воює?"},{"id":"варенн-2","текст":"Який податок вони відмовляються платити? Коли й навіщо його запровадили? Відповідь шукайте в літературі про війну, а не в Блока."}]},{"id":"штати","назва":"Договір, збори, гроші","стор":"458","файл":"blo09","текст":"Безперечно, аж ніяк не було випадковістю, що репрезентативний режим у його дуже аристократичній формі — англійського Парламенту, французьких «Штатів», германських Stànde та іспанських Кортесів — виник у державах, які щойно завершили феодальний етап свого розвитку й ще несли на собі його відбиток","примітка":["Безпосередньо перед цим реченням Блок перелічує тексти про право на опір; останній із них — «Декларація» комун Лангедоку 1356 р."],"питання":[{"id":"штати-1","текст":"Що сталося у війні 1356 р.? Чому, на вашу думку, саме тоді комуни заговорили про свої права?"}]},{"id":"рамка","назва":"Рамка книжки","стор":"16","файл":"blo01","текст":"хронологічні рамки нашого дослідження, за винятком кількох проблем виникнення або продовження, визначить той період нашої історії, який тривав приблизно від середини дев’ятого сторіччя до перших десятиліть тринадцятого;","примітка":[],"питання":[{"id":"рамка-1","текст":"Що це означає для того, як можна вживати Блока в дослідженні про 1337–1453 рр.? Що він дає і чого не дає?"}]},{"id":"причини","назва":"Про причини й наслідки","стор":"74","файл":"blo03","текст":"Якщо ж, натомість, упродовж еволюції, що триває іноді сотні років, ми зведемо докупи два ланцюжки феноменів, за своєю природою не подібних, а потім скажемо: «Ось поцейбіч усі причини; а потойбіч — усі наслідки», то важко уявити щось безглуздіше, аніж подібна дихотомія.","примітка":["У першій редакції тез війна — причина всього: централізації, військової науки, податків, національної свідомості."],"питання":[{"id":"причини-1","текст":"Перепишіть останнє речення висновку тез так, щоб у ньому не було «дихотомії», від якої застерігає Блок."}]},{"id":"платня","назва":"Гроші замість наділу","стор":"86–87","файл":"blo03","текст":"Позаяк тоді королі, великі барони, сеньйори дістали змогу зібрати, через стягування податків, досить великі багатства, то, часто в юридичних формах, недоречно підказуваних стародавньою практикою, система грошової оплати поступово зайняла чільне місце серед інших способів винагороди за службу","примітка":[],"питання":[{"id":"платня-1","текст":"Ознака № 2 почала руйнуватися задовго до війни. Що тоді зробила з нею війна, яка воювала найманими арміями? Запишіть гіпотезу."}]},{"id":"нація","назва":"Національне почуття до війни","стор":"441","файл":"blo08","текст":"Щоб відкрити темні передвістя національного почуття, треба звернути погляд на середовище менш отесане й більше схильне жити в теперішньому часі; звичайно, не так на народні маси, розгадати душевний стан яких нам не допоможе жоден документ, як на рицарські класи та на ту частину клерикального світу, яка, будучи малоосвіченою, обмежувалася тим, що віддзеркалювала у своїх писаннях навколишні опінії, роблячи на них особливий наголос.","примітка":[],"питання":[{"id":"нація-1","текст":"Якщо це почуття існувало вже в XI–XII ст., що дала йому війна? Оберіть одне слово — «посилилася», «змінила носія», «стала політичною» — і напишіть, що треба знайти, щоб це довести."}]}]},"свідки":{"вступ":["Два сучасники про одну подію — повстання селян 1358 р., яке назвали Жакерією.","Жан де Венетт — кармеліт, селянин за походженням; пише в Парижі.","Жан Фруассар — хроніст при знатних дворах; пише через десятиліття й переказує старшого хроніста.","Обидва переклади зроблено для цього дослідження безпосередньо з оригіналів."],"джерела":[{"назва":"Жан де Венетт","автор":"Жан де Венетт","заголовок":"ХРОНІКА, роки 1356 і 1358","підзаголовок":"Шляхта, яка вбирається, і селяни, які повстають","титул":["<em>Continuatio chronici Guillelmi de Nangiaco<\/em> (продовження хроніки Гійома де Нанжі за 1340–1368 рр.), писано бл. 1359–1368 рр.","Перекладено з видання: <em>Chronique latine de Guillaume de Nangis de 1113 à 1300 avec les continuations de cette chronique de 1300 à 1368<\/em> / éd. H. Géraud. Paris : Société de l'histoire de France, 1843. T. II, p. 237–238 (1356) і p. 263–265 (1358). Цифрова копія: Internet Archive, <code>chroniquelatined02guiluoft<\/code>.","Робочий переклад українською: Claude і Кіт Фріман","Підпільна друкарня, 2026 · для навчального використання","<strong>Переклад одинарний: з латини безпосередньо.<\/strong> Посередника немає.","<strong>Правовий стан:<\/strong> латинський текст XIV ст. і видання 1843 р. перебувають у суспільному надбанні. Сучасний англійський переклад (Newhall, Birdsall, Columbia University Press, 1953) під копірайтом, тож ми його <strong>не вживали навіть як контроль<\/strong>.","<strong>Другого свідка немає.<\/strong> Переклад зроблено з текстового шару скану (OCR), а не з зображення сторінки; три місця, де OCR зіпсований, відновлено за змістом і позначено нижче."],"про":[{"назва":"Хто це пише","html":"<p>Автор себе не називає; ім'я Жана де Венетта встановили видавці XIX ст. <strong>Кармеліт, пріор паризького монастиря свого ордену, за походженням селянин<\/strong> з Венетта біля Комп'єня (Балух В. О., Коцур В. П. Історія середніх віків. Т. 2. Чернівці, 2011, лекція 5). Пише в Парижі, тобто <strong>за кількадесят кілометрів від Бовезі<\/strong>, де почалося повстання, і сам каже, чого не бачив. Це важливо для роботи: він не свідок усього, про що розповідає, а <strong>людина певного кругозору<\/strong>, яка збирає чутки й новини.<\/p>"},{"назва":"Термінологічна сітка","html":"<p>Складена до перекладу. Головне: у латинському тексті <strong>немає слова «феодал»<\/strong> і немає «класу», є шляхетні, рицарі, селяни й пани.<\/p>\n<div class=\"tw\"><table><thead><tr><th>Латина<\/th><th>Тут<\/th><th>Чому не інакше<\/th><\/tr><\/thead><tbody><tr><td><em>nobiles<\/em><\/td><td>шляхетні<\/td><td>не «феодали» (слова немає ні в автора, ні в епосі) і не «дворяни» (це вже пізніша станова мова)<\/td><\/tr><tr><td><em>milites<\/em><\/td><td>рицарі<\/td><td>у XIV ст. вже переважно ранг знаті, а не просто «воїни»<\/td><\/tr><tr><td><em>militares (personae)<\/em><\/td><td>військові (особи)<\/td><td>Венетт ставить їх поруч із шляхетними як близьку, але не тотожну групу<\/td><\/tr><tr><td><em>rustici<\/em><\/td><td>селяни<\/td><td>основне слово автора; <em>rurales<\/em> — «сільські люди», <em>populus rusticanus<\/em> — «сільський люд», тримаю різницю<\/td><\/tr><tr><td><em>domini (sui)<\/em><\/td><td>(їхні) пани<\/td><td>ті, кому селяни коряться і від кого чекають оборони<\/td><\/tr><tr><td><em>capitaneus<\/em><\/td><td>ватажок<\/td><td>військове слово, не «вождь» і не «отаман»<\/td><\/tr><tr><td><em>Jaque Bonhomme<\/em><\/td><td>Жак Простак<\/td><td>глузливе прізвисько; <em>bonhomme<\/em> у мові XIV ст. — «простак», не «добра людина». Оригінал подаю в дужках при першому вжитку<\/td><\/tr><tr><td><em>villa<\/em><\/td><td>село, поселення<\/td><td>у Венетта це сільське поселення, не «місто» і не «вілла»<\/td><\/tr><tr><td><em>maneria<\/em><\/td><td>садиби<\/td><td>панські доми на землі, не «маєтки» як господарства<\/td><\/tr><tr><td><em>fortalitia<\/em><\/td><td>укріплення<\/td><td>дрібні укріплені місця, менші за замок (<em>castrum<\/em>)<\/td><\/tr><\/tbody><\/table><\/div>"}],"текст":[{"назва":"І. 1356 рік: шляхта вбирається","html":"<p class=\"ref\"><em>(Géraud, t. II, p. 237–238)<\/em><\/p>\n<p>Отже, 1356 року пиха й розпуста у багатьох шляхетних і військових особах неабияк розрослися. Бо коли вони вже раніше, як я сказав вище, завели були одяг укорочений і надто короткий, то цього року почали спотворювати себе ще розкішніше: носити перли й самоцвіти на каптурах і на позолочених та срібних поясах, і вигадливо прикрашати себе з голови до ніг усякими коштовностями й дорогоцінним камінням. І так вигадливо всі, від великого до малого, вкривалися цими пустощами, що перли й камені продавалися за велику ціну, і в Парижі їх ледве можна було знайти. Пам'ятаю, я бачив дві такі перлини, які хтось недавно купив був за вісім денаріїв, а того часу продав за десять ліврів. Почали тоді також носити пташине пір'я, приладнане до шапок; надміру віддавалися тілесним утіхам, а ще вночі грі в кості, а вдень — у м'яча долонею. Тож простий народ мав чим тужити — і тужив, — що гроші, зібрані з нього на справу війни, обернено й витрачено на такі марні ігри й ужитки.<\/p>\n<p>Тоді ж шляхетні, глузуючи з селян і простих людей, прозивали їх Жак Простак (<em>Jaque Bonhomme<\/em>). Відтак того року ті, хто на війні носив свою зброю по-селянському, осміяні й зневажені іншими, дістали це ім'я — Жак Простак, а селяни втратили своє ім'я. Цим іменем усіх селян відтоді довго звали і французи, і англійці. Та, на жаль, багато хто з тих, що тоді глузували, згодом сам став посміховищем для багатьох. Бо багато хто згодом, як буде сказано, жалюгідно загинув від рук селян, а потім, навпаки, дуже багато селян було вбито деякими шляхетними, і їхні села спалено на таку помсту. Та облишмо це поки що й перейдімо до речей дивовижніших і страшніших.<\/p>\n<blockquote><em>Далі в автора — похід принца Уельського 1356 р. і битва під Пуатьє.<\/em><\/blockquote>"},{"назва":"ІІ. 1358 рік: Жакерія","html":"<p class=\"ref\"><em>(Géraud, t. II, p. 263–265)<\/em><\/p>\n<p>Отже, поки інші міста й саме місто Париж зазнавали такого лихого поводження й майже не мали оборони, поблизу Парижа сталася подія, ніколи доти не чувана. Того ж 1358 року, влітку, селяни, що жили довкола Сен-Ле-д'Есеран і довкола Клермона в Бовезькій діоцезії, бачачи лиха й утиски, які їм завдавали з усіх боків, і що шляхетні їх не боронили, а радше самі, наче вороги, гнітили їх іще тяжче, — повстали проти шляхетних Франції й узялися до зброї. Зібравшись у великій кількості, вони поставили собі за ватажка одного селянина з села, що зветься Мелло, найтямущішого, а саме Гійома, званого Карль. І так, рушивши зі своєю зброєю й корогвами, вони пробігали краєм і всіх шляхетних мужів, яких могли знайти, навіть власних своїх панів, убивали, різали й без милосердя нищили. І не вдовольнялися лише цим, а й доми та укріплення шляхетних рівняли з землею, і, що найжалюгідніше, шляхетних пань і їхніх малих дітей, яких знаходили, люто віддавали на смерть. Так вони здобули тоді вельми міцний замок Ерменонвіль у Франції й там смертельно поранили багатьох шляхетних чоловіків і жінок, які там боронилися.<\/p>\n<p>І так посилилося це лихо, що й довкола Парижа було те саме. Бо ледве котрийсь шляхетний наважувався показатися поза укріпленими місцями; а якщо селяни його бачили або він потрапляв їм до рук, то бував убитий або йшов від них покалічений. І так зміцніли згадані сільські люди, що їх можна було налічити понад п'ять тисяч; вони шукали шляхетних і їхні садиби, щоб викоренити їх разом із жінками й дітьми. Через це шляхетні якийсь час трималися осторонь і не показувалися, як раніше.<\/p>\n<p>Та ця потворна справа тривала недовго. Бо як ті сільські люди почали її самі від себе, а не від Бога, і не з належної влади, як-от влади вищого пана, а самі від себе, — так само все їхнє прагнення швидко вщухло й скінчилося. Бо ті, що спершу, як їм здавалося, почали це з якоїсь ревності до справедливості, — адже пани їхні не боронили їх, а гнітили, — звернулися до вчинків ницих і мерзенних. Бо, як кажуть, вони гнітили шляхетних пань ницою хіттю, малих шляхетних дітей, невинняток, як ми сказали, убивали, знайдене майно грабували, а себе й своїх селянських жінок вигадливо вбирали. А що чинили вони зле, то довго це тривати не могло й не годилося.<\/p>\n<p>Тож шляхетні, бачачи це, потроху зібралися й рушили на них із вправною військовою обачністю, а найбільше король Наварри, який улесливими словами прикликав декого з їхніх ватажків і вбив їх, коли ті нічого такого не сподівалися й не думали. Коли ж ті загинули, король сам зі своїми людьми, разом із графом Сен-Поль, ударив біля Мондідьє на багатьох інших, що там зібралися, і перебив і знищив їх мечем. Та й на тому ця безглузда справа не лишилася безкарною. Бо рицарі й шляхетні, знову набравшись сил і прагнучи за неї помститися, зібралися ще міцніше; і, проходячи багатьма сільськими поселеннями, дуже багато з них спалили, а селян — і тих, кого вважали винними, і інших — жалюгідно вбивали в домах, у виноградниках, де ті копали, і на полях. Через ту пожежу плачуть Вербері й Круа-Сент-Уан біля Комп'єня та багато інших сільських поселень, яких я не бачив і тут не записую.<\/p>"}],"примітки":[{"назва":"Примітки перекладача","html":"<ol><li><strong>«Як я сказав вище»<\/strong> — покликання автора на його ж запис про 1346 р., де він уперше скаржиться на короткий одяг знаті. Тобто тема розкоші для нього не випадкова, а наскрізна.<\/li><li><strong>«Вісім денаріїв — десять ліврів».<\/strong> Лівр = 240 денаріїв, отже ціна зросла в 300 разів. Автор міряє розкіш не словами, а ціною — і <strong>каже, що бачив сам<\/strong>.<\/li><li><strong>«Ті, хто на війні носив свою зброю по-селянському».<\/strong> Латина: <em>qui in bellis rusticaliter portabant arma sua<\/em>. Ідеться, найімовірніше, про селян, яких брали в похід як піших ополченців: глузливе ім'я народилося на війні, а не в селі. Це <strong>припущення перекладача<\/strong> — звірити з літературою.<\/li><li><strong>«А селяни втратили своє ім'я»<\/strong> (<em>rustici perdiderunt nomen<\/em>). Буквально; смисл, найімовірніше, такий: слово «селяни» витіснило прізвисько. Інше прочитання — «втратили добре ім'я» — латина теж допускає. Вибір не зроблено, обидва варіанти чесні.<\/li><li><strong>Сен-Ле-д'Есеран.<\/strong> У виданні <em>sanctum Lupum de Cherunto<\/em>; ототожнення з Saint-Leu-d'Esserent — загальноприйняте, бо саме там, за «Великими французькими хроніками», 28 травня 1358 р. почалося повстання (примітка Жеро).<\/li><li><strong>Гійом Карль.<\/strong> У «Великих французьких хроніках» — Guillaume Cale або Callet; за ними ж страчений з наказу короля Наварри до 15 червня (примітка Жеро). <strong>Фруассар цього імені не знає<\/strong> — у нього «король Жак Простак» (див. сусідній переклад).<\/li><li><strong>Ерменонвіль.<\/strong> У рукописах <em>Cironovilla<\/em>; Жеро виправляє на <em>Ermenonvilla<\/em> за «Великими французькими хроніками». Ми йдемо за виправленням і позначаємо це тут.<\/li><li><strong>«Смертельно поранили»<\/strong> (<em>lethaliter ferierunt<\/em>). Не «вбили»: автор вибрав слабше слово, і переклад його не підсилює.<\/li><li><strong>«Понад п'ять тисяч».<\/strong> У Фруассара — «добрих шість тисяч». Історик XVIII ст. Секусс переклав Венетта як «понад 15 000» — Жеро вважає це друкарською помилкою. <strong>Три числа, жодне не з підрахунку.<\/strong><\/li><li><strong>«Біля Мондідьє».<\/strong> Латина <em>versus villam Montisdesideri<\/em>. У сучасній літературі головний розгром жаків зазвичай пов'язують із Мелло біля Клермона (10 червня 1358 р.). Розбіжність <strong>не розв'язано<\/strong>; звірити з Балухом/Коцуром (т. 2, лекція 5) і з Перруа.<\/li><li><strong>«Найтямущішого»<\/strong> (<em>magis astutum<\/em>). <em>Astutus<\/em> — і «тямущий», і «хитрий». Венетт, загалом співчутливий до селян, тут, найімовірніше, хвалить, тому — «тямущий». Це вибір перекладача.<\/li><li><strong>OCR.<\/strong> <em>peiias<\/em> виправлено на <em>perlas<\/em> (перли), <em>Iruphali<\/em> на <em>truphati<\/em> (осміяні), <em>Bojihomme<\/em> на <em>Bonhomme<\/em>. Зміст речень від цього не залежить.<\/li><\/ol>"},{"назва":"Що звірити далі","html":"<ul><li>Зображення сторінок 237–238 і 263–265 видання Жеро — три виправлення OCR у примітці 12.<\/li><li>Мондідьє чи Мелло — примітка 10.<\/li><li>Прочитання <em>perdiderunt nomen<\/em> — примітка 4.<\/li><\/ul>"}],"файл":"Жан де Венетт. Хроніка, 1356 і 1358 — шляхта і Жакерія.md"},{"назва":"Жан Фруассар","автор":"Жан Фруассар","заголовок":"ХРОНІКИ, книга I, § 413","підзаголовок":"Жакерія очима шляхетного читача","титул":["<em>Jean Froissart. Chroniques<\/em>, книга I, перша редакція, бл. 1370-х рр.","Перекладено з видання: <em>Chroniques de J. Froissart<\/em> / publiées pour la Société de l'histoire de France par Siméon Luce. T. V : 1356–1360. Paris, 1874. Livre premier, § 413, p. 99–101. Цифрова копія: Internet Archive, <code>chroniquesdejfro05froi<\/code>.","Робочий переклад українською: Claude і Кіт Фріман","Підпільна друкарня, 2026 · для навчального використання","<strong>Переклад одинарний: зі старофранцузької безпосередньо.<\/strong> Посередника немає.","<strong>Правовий стан:<\/strong> текст XIV ст. і видання 1874 р. перебувають у суспільному надбанні. Англійський уривок на сайті Fordham Medieval Sourcebook ми <strong>не вживали<\/strong>: він іде за іншою редакцією, і його правовий стан не з'ясовано.","<strong>Другого свідка немає.<\/strong> Переклад зроблено з текстового шару скану (OCR); рядкові номери видання (5, 10, 15…) зі тексту вилучено."],"про":[{"назва":"Хто це пише","html":"<p>Фруассар народився близько 1337 р. у Валансьєні (Геннегау), тобто <strong>в 1358 р. мав близько двадцяти років і в Бовезі не був<\/strong>. Першу редакцію книги I писав, найімовірніше, в 1370-х роках, при дворах і на замовлення знатних покровителів. Для подій до 1360 р. він <strong>значною мірою переказує хроніку Жана Ле Беля<\/strong>, каноніка з Льєжа. Тому, якщо його текст збігається з Ле Белем майже дослівно, — це не два свідки, а один. Підручник ЗВО, яким ми користуємося, прямо називає вади цієї хроніки: «суб'єктивний характер (різко негативне ставлення до повсталого селянства), неточності в описі подій і рицарську ідеологію» (Балух В. О., Коцур В. П. Історія середніх віків. Т. 2. Чернівці, 2011, лекція 5).<\/p>"},{"назва":"Термінологічна сітка","html":"<div class=\"tw\"><table><thead><tr><th>Старофранцузька<\/th><th>Тут<\/th><th>Чому не інакше<\/th><\/tr><\/thead><tbody><tr><td><em>gentil home<\/em>, <em>gentilz hommes<\/em><\/td><td>шляхетні люди<\/td><td>не «дворяни»; <em>gentil<\/em> у XIV ст. означає походження, а не вдачу<\/td><\/tr><tr><td><em>noble<\/em><\/td><td>знать<\/td><td>збірне: «вся знать королівства»<\/td><\/tr><tr><td><em>chevalier<\/em> / <em>escuier<\/em><\/td><td>рицар / зброєносець<\/td><td>два ранги шляхетного війська; зброєносець ще не висвячений<\/td><\/tr><tr><td><em>gens des villes champestres<\/em><\/td><td>люди з сільських поселень<\/td><td>не «селяни»: Фруассар цього слова тут не вживає, і переклад не підставляє<\/td><\/tr><tr><td><em>meschans gens<\/em><\/td><td>лихі люди<\/td><td><em>meschant<\/em> — і «нещасні», і «лихі»; тут оцінка, тому «лихі»<\/td><\/tr><tr><td><em>sans chief<\/em><\/td><td>без ватажка<\/td><td>ключове для автора: без голови — отже, безладдя<\/td><\/tr><tr><td><em>communautés<\/em><\/td><td>громади<\/td><td>селянські й міські спільноти, не «комуни» в правничому сенсі<\/td><\/tr><tr><td><em>Jake Bonhomme<\/em><\/td><td>Жак Простак<\/td><td>те саме глузливе прізвисько, що й у Венетта; оригінал — у дужках<\/td><\/tr><tr><td><em>bonnes maisons<\/em><\/td><td>добрі доми<\/td><td>панські садиби, менші за замок<\/td><\/tr><\/tbody><\/table><\/div>"}],"текст":[{"назва":"§ 413","html":"<p class=\"ref\"><em>(Luce, t. V, p. 99–101; 1358 р.)<\/em><\/p>\n<p>Невдовзі після звільнення короля Наварри сталася дивовижна й велика біда в багатьох частинах королівства Франції: у Бовезі, у Брі й над річкою Марною, у Ланнуа, у Валуа, у землі Куссі й довкола Суассона. Бо деякі люди з сільських поселень зібралися без ватажка в Бовезі. Спочатку їх було не більше ста чоловік. І казали вони, що вся знать королівства Франції, рицарі й зброєносці, зраджує королівство і що було б великим добром, якби хтось їх усіх знищив. І кожен із них казав: «Правду каже, правду каже! Ганьба тому, через кого станеться, що не всіх шляхетних людей буде знищено!»<\/p>\n<p>Тоді вони зібралися й пішли, без жодної іншої поради й без жодного обладунку, крім окутих залізом кийків і ножів, до дому одного рицаря, що жив поблизу. І розбили дім, і вбили рицаря, даму й дітей, малих і великих, і спалили дім. Удруге вони пішли до іншого міцного замку й учинили ще гірше: схопили рицаря й міцно прив'язали його до стовпа, і багато хто з них згвалтував його дружину й доньку на очах у рицаря. Потім убили даму, яка була вагітна, і доньку, і всіх дітей, а потім, у великих муках, і самого рицаря, і спалили й зруйнували замок.<\/p>\n<p>Так вони робили в багатьох замках і добрих домах і так розмножилися, що їх стало добрих шість тисяч. І всюди, куди вони приходили, їх більшало, бо кожен, хто був такий, як вони, ішов за ними. Тож усі рицарі, пані, зброєносці, їхні дружини й діти тікали від них. Пані й панни відносили своїх дітей за десять чи двадцять льє, туди, де могли вберегтися, і лишали свої доми зовсім порожніми, а майно в них. А ці лихі люди, зібрані без ватажків і без обладунку, грабували й палили все, убивали всіх шляхетних людей, яких знаходили, і ґвалтували всіх пань і дівчат без жалю й без милосердя, мов скажені пси.<\/p>\n<p>Справді, ніколи не бувало ні між християнами, ні між сарацинами такого шаленства, яке чинили ці лихі люди. Бо хто більше чинив зла чи ниціших учинків — таких, що людське створіння не повинно б і наважитися подумати, уявити чи побачити, — той був у них найшанованіший і найбільший майстер. Я не наважився б ані написати, ані розповісти тих жахливих і непристойних учинків, які вони чинили з паніями. Але серед інших безчинств і ницих учинків вони вбили одного рицаря, наштрикнули на рожен, обертали над вогнем і засмажили на очах у дами та її дітей. Після того як десятеро чи дванадцятеро збезчестили й згвалтували даму, вони хотіли силою змусити її й дітей їсти з нього, а потім заподіяли їм лиху смерть. І обрали вони з-поміж себе короля, якого звали Жак Простак (<em>Jake Bonhomme<\/em>), — він був, як тоді казали, з Клермона в Бовезі, — і обрали гіршого з гірших.<\/p>\n<p>Ці лихі люди спалили й зруйнували в Бовезі та довкола Корбі, Ам'єна й Мондідьє понад шістдесят добрих домів і міцних замків. І коли б Бог своєю ласкою не поклав тому краю, лихо так розрослося б, що всі громади знищили б шляхетних людей, потім святу Церкву, а потім і всіх багатих людей по всіх краях; бо достеменно так само чинили такі люди в Брі та в Пертуа. І всім паніям і панням краю, а також рицарям і зброєносцям, які могли від них утекти, довелося тікати до Мо в Брі, одне за одним, у самих сукнях, як хто міг, — так само герцогині Нормандській, і герцогині Орлеанській, і безлічі знатних пань, як і іншим, — якщо вони хотіли вберегтися від наруги й насильства, а потім від смерті й убивства.<\/p>\n<p>Достеменно так само такі люди поводилися між Парижем і Нуайоном, між Парижем і Суассоном, між Суассоном і Гамом у Вермандуа і по всій землі Куссі. Там були найбільші ґвалтівники й лиходії; і в землі Куссі, і в графстві Валуа, і в єпископствах Ланському, Суассонському й Нуайонському вони знищили понад сто замків і добрих домів рицарів і зброєносців, а все, що знаходили, вбивали й грабували. Але Бог своєю ласкою поклав тому край — і за це Йому слід добре дякувати, — як ви почуєте далі.<\/p>\n<blockquote><em>Далі в автора, § 414, — оборона Мо, де шляхта розбиває жаків.<\/em><\/blockquote>"}],"примітки":[{"назва":"Примітки перекладача","html":"<ol><li><strong>«Невдовзі після звільнення короля Наварри».<\/strong> Карла Злого звільнено з ув'язнення в листопаді 1357 р. Фруассар датує повстання не числом, а <strong>подією в житті знаті<\/strong> — і це теж свідчення про його кругозір.<\/li><li><strong>«Без ватажка»<\/strong> (<em>sans chief<\/em>) повторено двічі, і двічі поруч із «без обладунку». Тим часом <strong>Венетт називає ватажка на ім'я<\/strong> — Гійом Карль. Для Фруассара важить не те, хто вів жаків, а те, що їх ніхто не вів, тобто що це безлад.<\/li><li><strong>«Хотіли силою змусити її й дітей їсти з нього».<\/strong> У тексті займенник <em>les<\/em> без іменника; найімовірніше, ідеться про даму й дітей. Цей епізод <strong>ніде, крім цієї традиції, не підтверджено<\/strong>; сам автор пише «я не наважився б розповісти», тобто знає це з переказу.<\/li><li><strong>«Обрали гіршого з гірших»<\/strong> (<em>le pieur des pieurs<\/em>). Глузлива гра з виборами короля: у Фруассара повстанці пародіюють порядок шляхти.<\/li><li><strong>«Шість тисяч».<\/strong> У Венетта — «понад п'ять тисяч». Обидва числа — оцінки, не підрахунок.<\/li><li><strong>«Громади знищили б… святу Церкву… і всіх багатих людей».<\/strong> Головний страх автора — не за королівство, а за <strong>порядок<\/strong>, де знать, Церква й багаті стоять разом.<\/li><li><strong>«Мондідьє».<\/strong> Обидва хроністи згадують Мондідьє, але з різних приводів: Фруассар — серед спалених місць, Венетт — як місце розгрому жаків (див. примітку 10 до перекладу Венетта).<\/li><li><strong>Пертуа, Гам, Нуайон<\/strong> — передаю за сучасними назвами місцевостей; в OCR <em>Partois<\/em>, <em>Hen en Vermendois<\/em>, <em>Noion<\/em>.<\/li><\/ol>"},{"назва":"Що звірити далі","html":"<ul><li>Хроніку Жана Ле Беля (вид. Viard, Déprez, 1904–1905; правовий стан видання не з'ясовано, текст XIV ст. — у суспільному надбанні) — <strong>чи це той самий текст<\/strong>. Якщо так, пара «Венетт — Фруассар» є парою «Венетт — Ле Бель», і в паспорті треба назвати саме Ле Беля.<\/li><li>Зображення с. 99–101 видання Люса.<\/li><\/ul>"}],"файл":"Фруассар. Хроніки, книга I, § 413 — Жакерія.md"}],"питання":[{"id":"винен","назва":"Хто винен?","текст":"Чому, за автором, селяни повстали? Кого він робить відповідальним?"},{"id":"повсталі","назва":"Хто такі повсталі?","текст":"Як автор їх називає? Чи має їхній ватажок ім'я?"},{"id":"мовчить","назва":"Чого автор не каже?","текст":"Що є в одного й немає в іншого? Що кожен замовчує?"}],"підсумок":[{"id":"свідки-підсумок","текст":"Що з цих двох текстів можна сказати про ознаку № 1 (підлеглість селянина) і ознаку № 3 (верховенство воїнів) у 1356–1358 рр.? Два-три речення."}]},"таблиця":{"колонки":[{"id":"зміст","назва":"Що означає (своїми словами, зі сторінкою)","етап":1,"вибір":false},{"id":"1300","назва":"Близько 1300 р.","етап":1,"вибір":false},{"id":"1450","назва":"Близько 1450 р.","етап":2,"вибір":false},{"id":"роль","назва":"Роль війни","етап":3,"вибір":true},{"id":"доказ","назва":"На чому тримається","етап":2,"вибір":false}],"рядки":[{"id":"о1","n":"1","назва":"підлеглість селянина"},{"id":"о2","n":"2","назва":"служба за наділ замість платні"},{"id":"о3","n":"3","назва":"верховенство класу професійних воїнів"},{"id":"о4","n":"4","назва":"зв'язки покори й протекції людини до людини"},{"id":"о5","n":"5","назва":"подрібнення влади"},{"id":"о6","n":"6","назва":"виживання роду й держави"},{"id":"о7","n":"+","назва":"спадок: ідея договору й право на опір (с. 457–458)"}],"ролі":["зруйнувала","прискорила","змінила форму","не торкнулася","не встановлено"]},"підсумок":[{"id":"нове-питання","текст":"Одне речення: чим ваше дослідницьке питання відрізняється від теми першої редакції тез?"},{"id":"труднощі","текст":"Що на цьому етапі було незрозумілим або що хочеться обговорити з керівником?"}]};
+(function(){
+'use strict';
+const M = DATA['мета'], STAGE = M['етап'], IZB = M['ізборник'];
+const KEY = 'stolitnia-viina:v1';
+const ROLE_COLORS = ['var(--accent)','var(--gold)','var(--blue)','var(--green)','var(--muted)'];
+const VIEWS = ['marshrut','cheklyst','blok','svidky','tablytsia','zdaty'];
+let state = {fields:{}, checks:{}, updated:null};
+let storageOK = true, timer = null;
+
+/* ---------- допоміжне ---------- */
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function h(html){ const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; }
+function izb(file){ return IZB + file + '.htm'; }
+function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('on'), 2200); }
+
+/* ---------- збереження ---------- */
+function load(){
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw){ const o = JSON.parse(raw); state.fields = o.fields || {}; state.checks = o.checks || {}; state.updated = o.updated || null; }
+  } catch(e){ storageOK = false; }
+}
+function persist(){
+  state.updated = new Date().toISOString();
+  try { localStorage.setItem(KEY, JSON.stringify(state)); storageOK = true; } catch(e){ storageOK = false; }
+  indicator();
+  refreshStats();
+}
+function queue(){ clearTimeout(timer); indicator(true); timer = setTimeout(persist, 450); }
+function indicator(pending){
+  const el = $('#saved'), sp = $('span', el);
+  el.classList.toggle('pending', !!pending);
+  el.classList.toggle('fail', !storageOK && !pending);
+  if (pending) sp.textContent = 'зберігаю…';
+  else if (!storageOK) sp.textContent = 'браузер не дозволяє зберігати — вивантажте файл';
+  else if (state.updated){
+    const d = new Date(state.updated);
+    sp.textContent = 'збережено о ' + d.toLocaleTimeString('uk-UA', {hour:'2-digit', minute:'2-digit'});
+  } else sp.textContent = 'відповіді зберігаються в цьому браузері';
+}
+
+/* ---------- поле відповіді ---------- */
+function autosize(t){ t.style.height = 'auto'; t.style.height = Math.max(88, t.scrollHeight + 2) + 'px'; }
+function field(id, label, placeholder){
+  const w = h(`<div class="field" data-field="${esc(id)}"><label>${label}</label><textarea rows="3" placeholder="${esc(placeholder || 'Ваша відповідь…')}"></textarea></div>`);
+  const t = $('textarea', w);
+  t.value = state.fields[id] || '';
+  w.classList.toggle('filled', !!t.value.trim());
+  t.addEventListener('input', () => {
+    state.fields[id] = t.value;
+    w.classList.toggle('filled', !!t.value.trim());
+    autosize(t); queue(); markCompletion();
+  });
+  requestAnimationFrame(() => autosize(t));
+  return w;
+}
+
+/* ---------- маршрут ---------- */
+function renderRoute(){
+  const v = $('#v-marshrut');
+  const steps = DATA['маршрут'].map(s => {
+    const st = s.n < STAGE ? 'пройдено' : s.n === STAGE ? 'зараз' : 'далі';
+    return `<div class="step ${s.n === STAGE ? 'now' : ''}"><div class="num">${s.n}</div><span class="st">${st}</span><h3>${esc(s['назва'])}</h3><p>${esc(s['мета'])}</p></div>`;
+  }).join('');
+  v.innerHTML = `
+    <div class="hero">
+      <div>
+        <div class="kicker">Читалка дослідження · етап ${STAGE} із ${DATA['маршрут'].length}</div>
+        <h1>${esc(M['назва'])}</h1>
+        <div class="sub">${esc(M['підзаголовок'])}</div>
+        <div class="qcard"><div class="kicker">Головне питання</div>
+          <p>Які з ознак, якими Марк Блок описав феодальне суспільство, Столітня війна <b>зруйнувала</b>, які <b>прискорила</b>, а які залишила <b>недоторканими</b>?</p></div>
+        <p class="lead">Блок вважав, що європейські суспільства відійшли від феодального типу ще в середині XIII ст., — а війна почалася 1337 р. Тож питання не в тому, «чи зруйнувала війна феодалізм», а в тому, <i>що саме</i> вона змінила і як це довести.</p>
+      </div>
+      <aside class="side">
+        <div class="kicker">Як працювати</div>
+        <ol class="how">
+          <li>Читайте за <a href="#cheklyst">чек-листом</a> і позначайте прочитане.</li>
+          <li>У розділі <a href="#blok">«Блок»</a> відповідайте на питання до кожної цитати.</li>
+          <li>Порівняйте <a href="#svidky">двох свідків</a> Жакерії 1358 р.</li>
+          <li>Заповніть відкриті колонки <a href="#tablytsia">таблиці ознак</a>.</li>
+          <li>Вивантажте відповіді у <a href="#zdaty">«Здати»</a> й надішліть керівникові.</li>
+        </ol>
+        <div class="stats" id="route-stats"></div>
+      </aside>
+    </div>
+    <div class="steps">${steps}</div>
+    <div class="group" style="margin-top:30px"><h3>Обов'язкове читання етапу <em id="mini-count"></em></h3><ul class="cl mini" id="mini-cl"></ul></div>`;
+  const ul = $('#mini-cl', v);
+  DATA['чек'].filter(c => c['вага'] === "обов'язково").forEach(c => ul.appendChild(checkItem(c)));
+}
+
+/* ---------- чек-лист ---------- */
+function checkItem(c){
+  let where = esc(c['де']);
+  if (/^blo\d\d$/.test(c['куди'])) where += ` · <a href="${izb(c['куди'])}" target="_blank" rel="noopener">відкрити в «Ізборнику» ↗</a>`;
+  else if (c['куди'].startsWith('#')) where = `<a href="${esc(c['куди'])}">${esc(c['де'])} →</a>`;
+  const req = c['вага'] === "обов'язково";
+  const li = h(`<li class="ci" data-check="${esc(c.id)}">
+    <button class="cb" role="checkbox" aria-checked="false" aria-label="Позначити прочитаним"><svg viewBox="0 0 28 28"><rect x="2" y="2" width="24" height="24" rx="7"/><path d="M8 14.5l4 4L20 10"/></svg></button>
+    <div class="ct"><span class="t">${esc(c['назва'])}</span><span class="w">${where}</span></div>
+    <span class="weight ${req ? 'req' : ''}">${esc(c['вага'])}</span></li>`);
+  $('.cb', li).addEventListener('click', () => toggleCheck(c.id));
+  return li;
+}
+function toggleCheck(id){
+  const before = reqDone();
+  state.checks[id] = !state.checks[id];
+  if (!state.checks[id]) delete state.checks[id];
+  syncChecks(id);
+  persist();
+  const after = reqDone();
+  if (after.done === after.total && before.done < before.total) celebrate();
+}
+function reqDone(){
+  const req = DATA['чек'].filter(c => c['вага'] === "обов'язково");
+  return {done: req.filter(c => state.checks[c.id]).length, total: req.length};
+}
+function syncChecks(popId){
+  $$('[data-check]').forEach(li => {
+    const on = !!state.checks[li.dataset.check];
+    li.classList.toggle('done', on);
+    $('.cb', li).setAttribute('aria-checked', on);
+    if (popId && li.dataset.check === popId && on){ li.classList.remove('pop'); void li.offsetWidth; li.classList.add('pop'); }
+  });
+  const all = DATA['чек'].length, done = DATA['чек'].filter(c => state.checks[c.id]).length;
+  const r = reqDone();
+  const ring = $('#ring');
+  if (ring){
+    const C = 2 * Math.PI * 70, frac = all ? done / all : 0;
+    const fg = $('.fg', ring); fg.style.strokeDasharray = C; fg.style.strokeDashoffset = C * (1 - frac);
+    $('.lbl b', ring).textContent = Math.round(frac * 100) + '%';
+    $('.lbl span', ring).textContent = done + ' із ' + all;
+    ring.classList.toggle('full', done === all);
+    $('#ring-sub').textContent = `обов'язкове: ${r.done} із ${r.total}`;
+    $('#banner').classList.toggle('on', r.done === r.total);
+  }
+  const mc = $('#mini-count'); if (mc) mc.textContent = r.done + ' / ' + r.total;
+  $$('.group[data-w]').forEach(g => {
+    const items = DATA['чек'].filter(c => c['вага'] === g.dataset.w);
+    $('em', g).textContent = items.filter(c => state.checks[c.id]).length + ' / ' + items.length;
+  });
+}
+function celebrate(){
+  const box = $('#ringbox'); if (!box || !box.offsetParent) { toast("Усе обов'язкове прочитано!"); return; }
+  const colors = ['var(--accent)','var(--gold)','var(--green)','var(--blue)'];
+  const rect = $('#ring').getBoundingClientRect(), b = box.getBoundingClientRect();
+  for (let i = 0; i < 26; i++){
+    const s = document.createElement('i'); s.className = 'spark';
+    const a = Math.random() * Math.PI * 2, d = 70 + Math.random() * 70;
+    s.style.left = (rect.left - b.left + rect.width / 2) + 'px'; s.style.top = (rect.top - b.top + rect.height / 2) + 'px';
+    s.style.background = colors[i % 4];
+    s.style.setProperty('--dx', Math.cos(a) * d + 'px'); s.style.setProperty('--dy', Math.sin(a) * d + 'px');
+    box.appendChild(s); setTimeout(() => s.remove(), 1200);
+  }
+  toast("Усе обов'язкове прочитано!");
+}
+function renderChecklist(){
+  const v = $('#v-cheklyst');
+  v.innerHTML = `<div class="vh"><div class="kicker">Етап ${STAGE}</div><h2>Чек-лист літератури</h2>
+    <p>Позначайте прочитане. Сторінки — паперового видання Блока (Київ, 2001); в «Ізборнику» вони стоять у тексті в косих рисках, наприклад /452/. Якщо сторінки не знайдено, дивіться на одну раніше: близько 36 номерів у публікації пропущено.</p></div>
+    <div class="cl-wrap">
+      <div class="ringbox" id="ringbox">
+        <div class="ring" id="ring"><svg viewBox="0 0 160 160"><circle class="bg" cx="80" cy="80" r="70"/><circle class="fg" cx="80" cy="80" r="70"/></svg><div class="lbl"><b>0%</b><span></span></div></div>
+        <div class="sub" id="ring-sub"></div>
+        <div class="banner" id="banner">Обов'язкове прочитано. Час переходити до таблиці ознак.</div>
+      </div>
+      <div id="groups"></div>
+    </div>`;
+  const g = $('#groups', v);
+  ["обов'язково", 'бажано', 'за бажанням'].forEach(w => {
+    const items = DATA['чек'].filter(c => c['вага'] === w);
+    if (!items.length) return;
+    const sec = h(`<div class="group" data-w="${esc(w)}"><h3>${esc(w)} <em></em></h3><ul class="cl"></ul></div>`);
+    items.forEach(c => $('ul', sec).appendChild(checkItem(c)));
+    g.appendChild(sec);
+  });
+}
+
+/* ---------- Блок ---------- */
+function renderBlok(){
+  const v = $('#v-blok'), B = DATA['блок'];
+  v.innerHTML = `<div class="narrow"><div class="vh"><div class="kicker">Марк Блок · «Феодальне суспільство» · Київ, 2001</div><h2>Мірка: що таке феодальне суспільство</h2></div>
+    <div class="intro">${B['вступ'].map(p => `<p>${esc(p)}</p>`).join('')}</div>
+    <div class="toc" id="btoc"></div><div id="quotes"></div></div>`;
+  const box = $('#quotes', v), toc = $('#btoc', v);
+  B['цитати'].forEach((q, i) => {
+    const t = q['текст'];
+    const pre = /^[a-zа-яіїєґ]/.test(t) ? '… ' : '', post = /[.!?»]$/.test(t) ? '' : ' …';
+    const card = h(`<article class="quote" id="q-${esc(q.id)}" data-q="${esc(q.id)}">
+      <div class="top"><div class="kicker">${i + 1} · с. ${esc(q['стор'])}</div><span class="done-mark">✓ відповіді є</span></div>
+      <h3>${esc(q['назва'])}</h3>
+      <p class="qtext">${pre}${esc(t)}${post}</p>
+      <div class="src"><span>Блок М. Феодальне суспільство / пер. В. Шовкуна. Київ : Всесвіт, 2001. С. ${esc(q['стор'])}.</span>
+        <a href="${izb(q['файл'])}" target="_blank" rel="noopener">читати розділ в «Ізборнику» ↗</a></div>
+      ${q['примітка'].map(n => `<div class="note">${esc(n)}</div>`).join('')}
+    </article>`);
+    q['питання'].forEach(p => card.appendChild(field(p.id, esc(p['текст']))));
+    box.appendChild(card);
+    toc.appendChild(h(`<a href="#q-${esc(q.id)}" data-tq="${esc(q.id)}"><i></i>${esc(q['назва'])}</a>`));
+  });
+  $$('a[data-tq]', toc).forEach(a => a.addEventListener('click', e => {
+    e.preventDefault(); document.getElementById('q-' + a.dataset.tq).scrollIntoView({behavior:'smooth', block:'start'});
+  }));
+}
+
+/* ---------- свідки ---------- */
+function renderSvidky(){
+  const v = $('#v-svidky'), S = DATA['свідки'], docs = S['джерела'].filter(Boolean);
+  v.innerHTML = `<div class="vh narrow" style="margin-left:0"><div class="kicker">Два свідки · Жакерія 1358 р.</div><h2>Одна подія — два погляди</h2>
+    ${S['вступ'].map(p => `<p>${esc(p)}</p>`).join('')}</div>
+    <div class="modes" id="modes"></div>
+    <div class="pairv" id="pairv"></div>
+    <div class="compare narrow" id="compare"></div>`;
+  const pv = $('#pairv', v);
+  docs.forEach((d, k) => {
+    const sec = s => s.map(x => `<h4>${esc(x['назва'])}</h4>${x.html}`).join('');
+    pv.appendChild(h(`<article class="doc" data-doc="${k}">
+      <div class="doc-h"><div class="a">${esc(d['автор'])}</div><h3>${esc(d['заголовок'])}</h3><div class="s">${esc(d['підзаголовок'])}</div></div>
+      <div class="doc-b">
+        <details><summary>Видання, переклад, правовий стан</summary><div class="titul">${d['титул'].map(x => `<p>${x}</p>`).join('')}</div></details>
+        ${d['про'].length ? `<details><summary>Хто це пише · слова перекладу</summary><div>${sec(d['про'])}</div></details>` : ''}
+        ${sec(d['текст'])}
+        ${d['примітки'].length ? `<details><summary>Примітки перекладача</summary><div>${sec(d['примітки'])}</div></details>` : ''}
+      </div></article>`));
+  });
+  const modes = $('#modes', v);
+  const opts = [['both', 'Поруч']].concat(docs.map((d, k) => [String(k), d['назва']]));
+  opts.forEach(([m, label]) => {
+    const b = h(`<button aria-pressed="false" data-mode="${m}">${esc(label)}</button>`);
+    b.addEventListener('click', () => setMode(m));
+    modes.appendChild(b);
+  });
+  function setMode(m){
+    if (m === 'both' && innerWidth < 980) m = '0';
+    pv.classList.toggle('one', m !== 'both');
+    $$('.doc', pv).forEach(d => d.classList.toggle('hide', m !== 'both' && d.dataset.doc !== m));
+    $$('button', modes).forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === m));
+  }
+  setMode(innerWidth < 980 ? '0' : 'both');
+  if (innerWidth < 980) $('[data-mode="both"]', modes).style.display = 'none';
+
+  const cmp = $('#compare', v);
+  cmp.appendChild(h(`<div class="vh"><div class="kicker">Порівняння</div><h2 style="font-size:30px">Три питання до пари</h2></div>`));
+  S['питання'].forEach(q => {
+    const card = h(`<div class="cq"><h3>${esc(q['назва'])}</h3><p>${esc(q['текст'])}</p><div class="two"></div></div>`);
+    docs.forEach((d, k) => $('.two', card).appendChild(field(q.id + ':' + k, esc(d['назва']))));
+    cmp.appendChild(card);
+  });
+  S['підсумок'].forEach(q => {
+    const card = h(`<div class="cq"><h3>Підсумок</h3></div>`);
+    card.appendChild(field(q.id, esc(q['текст'])));
+    cmp.appendChild(card);
+  });
+}
+
+/* ---------- таблиця ознак ---------- */
+function renderTable(){
+  const v = $('#v-tablytsia'), T = DATA['таблиця'];
+  v.innerHTML = `<div class="narrow"><div class="vh"><div class="kicker">Інструмент дослідження</div><h2>Таблиця ознак</h2>
+    <p>Уся робота збирається тут. Таблиця росте від етапу до етапу і в кінці сама стає висновком. Зараз відкрито колонки етапу ${STAGE}; решта відкриються пізніше.</p></div>
+    <div class="legend">${T['ролі'].map((r, i) => `<span><i style="background:${ROLE_COLORS[i] || 'var(--muted)'}"></i>${esc(r)}</span>`).join('')}</div>
+    <div id="feats"></div></div>`;
+  const box = $('#feats', v);
+  T['рядки'].forEach(r => {
+    const card = h(`<div class="feat ${r.n === '+' ? 'legacy' : ''}"><div class="feat-h"><span class="n">${esc(r.n)}</span><h3>${esc(r['назва'])}</h3></div><div class="fgrid"></div></div>`);
+    const g = $('.fgrid', card), later = [];
+    T['колонки'].forEach(c => {
+      const id = `т:${r.id}:${c.id}`;
+      if (c['етап'] > STAGE){
+        later.push(`<span>${esc(c['назва'])} <b>етап ${c['етап']}</b></span>`);
+      } else if (c['вибір']){
+        const f = h(`<div class="field" data-field="${esc(id)}"><label>${esc(c['назва'])}</label><div class="roles"></div></div>`);
+        T['ролі'].forEach((role, i) => {
+          const b = h(`<button aria-pressed="${state.fields[id] === role}"><i style="background:${ROLE_COLORS[i]}"></i>${esc(role)}</button>`);
+          b.addEventListener('click', () => {
+            state.fields[id] = state.fields[id] === role ? '' : role;
+            $$('button', f).forEach(x => x.setAttribute('aria-pressed', 'false'));
+            if (state.fields[id]) b.setAttribute('aria-pressed', 'true');
+            queue();
+          });
+          $('.roles', f).appendChild(b);
+        });
+        g.appendChild(f);
+      } else {
+        g.appendChild(field(id, esc(c['назва']), c.id === 'зміст' ? 'Своїми словами, з номером сторінки…' : ''));
+      }
+    });
+    if (later.length) card.appendChild(h(`<div class="later"><i>далі</i>${later.join('')}</div>`));
+    box.appendChild(card);
+  });
+}
+
+/* ---------- здати ---------- */
+function openFields(){
+  const L = [];
+  DATA['блок']['цитати'].forEach(q => q['питання'].forEach(p => L.push(p.id)));
+  DATA['свідки']['питання'].forEach(q => DATA['свідки']['джерела'].forEach((d, k) => d && L.push(q.id + ':' + k)));
+  DATA['свідки']['підсумок'].forEach(q => L.push(q.id));
+  DATA['таблиця']['рядки'].forEach(r => DATA['таблиця']['колонки'].forEach(c => c['етап'] <= STAGE && L.push(`т:${r.id}:${c.id}`)));
+  DATA['підсумок'].forEach(q => L.push(q.id));
+  return L;
+}
+function buildMD(){
+  const f = id => (state.fields[id] || '').trim() || '—';
+  const L = [`# ${M['назва']}`, '', `Відповіді, етап ${STAGE}. Вивантажено ${new Date().toLocaleString('uk-UA')}.`, ''];
+  L.push('## Чек-лист літератури', '');
+  DATA['чек'].forEach(c => L.push(`- [${state.checks[c.id] ? 'x' : ' '}] ${c['назва']} (${c['де']})`));
+  L.push('', '## Блок: питання до цитат', '');
+  DATA['блок']['цитати'].forEach(q => {
+    L.push(`### ${q['назва']} (с. ${q['стор']})`, '');
+    q['питання'].forEach(p => L.push(`**${p['текст']}**`, '', f(p.id), ''));
+  });
+  L.push('## Два свідки: Жакерія 1358 р.', '');
+  DATA['свідки']['питання'].forEach(q => {
+    L.push(`### ${q['назва']}`, '');
+    DATA['свідки']['джерела'].forEach((d, k) => d && L.push(`**${d['назва']}:** ${f(q.id + ':' + k)}`, ''));
+  });
+  DATA['свідки']['підсумок'].forEach(q => L.push(`**${q['текст']}**`, '', f(q.id), ''));
+  L.push('## Таблиця ознак', '');
+  DATA['таблиця']['рядки'].forEach(r => {
+    L.push(`### ${r.n}. ${r['назва']}`, '');
+    DATA['таблиця']['колонки'].forEach(c => c['етап'] <= STAGE && L.push(`- **${c['назва']}:** ${f(`т:${r.id}:${c.id}`)}`));
+    L.push('');
+  });
+  L.push('## Підсумок етапу', '');
+  DATA['підсумок'].forEach(q => L.push(`**${q['текст']}**`, '', f(q.id), ''));
+  return L.join('\n');
+}
+function download(name, text, type){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([text], {type}));
+  a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+function stamp(){ return new Date().toISOString().slice(0, 10); }
+function renderZdaty(){
+  const v = $('#v-zdaty');
+  v.innerHTML = `<div class="vh"><div class="kicker">Етап ${STAGE}</div><h2>Здати</h2>
+    <p>Дві останні відповіді — і файл для керівника. Відповіді нікуди не надсилаються самі: вивантажте файл і передайте його.</p></div>
+    <div class="zgrid">
+      <div id="zq"></div>
+      <div>
+        <div class="panel">
+          <h3>Готовність</h3>
+          <div class="mrow"><span>відповіді</span><span id="m-ans"></span></div><div class="meter"><i id="m-ans-bar" style="width:0"></i></div>
+          <div class="mrow"><span>обов'язкове читання</span><span id="m-read"></span></div><div class="meter"><i id="m-read-bar" style="width:0;background:var(--green)"></i></div>
+          <div class="row" style="margin-top:20px">
+            <button class="btn primary" id="b-md">Завантажити відповіді (.md)</button>
+            <button class="btn" id="b-copy">Скопіювати текст</button>
+          </div>
+          <div class="privacy">Відповіді зберігаються лише в цьому браузері на цьому пристрої. Інший браузер чи пристрій їх не побачить — для перенесення є резервна копія.</div>
+          <div class="row" style="margin-top:16px">
+            <button class="btn ghost" id="b-json">Резервна копія (.json)</button>
+            <label class="btn ghost" style="cursor:pointer">Відновити з копії<input type="file" id="f-json" accept=".json,application/json" hidden></label>
+          </div>
+          <div class="row" style="margin-top:16px">
+            <button class="btn ghost danger" id="b-reset">Почати заново</button>
+            <span class="confirm" id="c-reset">Стерти всі відповіді й позначки? <button class="btn danger" id="b-yes">Так, стерти</button><button class="btn ghost" id="b-no">Ні</button></span>
+          </div>
+        </div>
+        <details style="margin-top:16px;background:var(--card)"><summary>Що буде у файлі</summary><div><pre class="md" id="md-prev"></pre></div></details>
+      </div>
+    </div>`;
+  const zq = $('#zq', v);
+  DATA['підсумок'].forEach(q => { const p = h(`<div class="panel" style="margin-bottom:16px"></div>`); p.appendChild(field(q.id, esc(q['текст']))); zq.appendChild(p); });
+  $('#b-md', v).addEventListener('click', () => { download(`Відповіді — етап ${STAGE} — ${stamp()}.md`, buildMD(), 'text/markdown;charset=utf-8'); toast('Файл завантажено'); });
+  $('#b-copy', v).addEventListener('click', () => copy(buildMD()));
+  $('#b-json', v).addEventListener('click', () => { download(`Резервна копія — ${stamp()}.json`, JSON.stringify({format:'stolitnia-viina', v:1, ...state}, null, 1), 'application/json'); toast('Копію завантажено'); });
+  $('#f-json', v).addEventListener('change', e => {
+    const file = e.target.files[0]; if (!file) return;
+    const r = new FileReader();
+    r.onload = () => {
+      try {
+        const o = JSON.parse(r.result);
+        if (o.format !== 'stolitnia-viina' || typeof o.fields !== 'object') throw new Error();
+        state = {fields: o.fields || {}, checks: o.checks || {}, updated: o.updated || null};
+        persist(); renderAll(); toast('Відновлено з копії');
+      } catch(err){ toast('Це не резервна копія цієї читалки'); }
+    };
+    r.readAsText(file); e.target.value = '';
+  });
+  $('#b-reset', v).addEventListener('click', () => $('#c-reset').classList.add('on'));
+  $('#b-no', v).addEventListener('click', () => $('#c-reset').classList.remove('on'));
+  $('#b-yes', v).addEventListener('click', () => { state = {fields:{}, checks:{}, updated:null}; persist(); renderAll(); toast('Усе стерто'); });
+  $('details', v).addEventListener('toggle', e => { if (e.target.open) $('#md-prev').textContent = buildMD(); });
+}
+function copy(text){
+  const done = () => toast('Скопійовано');
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+  function fallback(){
+    const t = document.createElement('textarea'); t.value = text; t.style.position = 'fixed'; t.style.opacity = '0';
+    document.body.appendChild(t); t.select();
+    try { document.execCommand('copy'); done(); } catch(e){ toast('Не вдалося скопіювати'); }
+    t.remove();
+  }
+}
+
+/* ---------- лічильники ---------- */
+function markCompletion(){
+  $$('.quote[data-q]').forEach(card => {
+    const q = DATA['блок']['цитати'].find(x => x.id === card.dataset.q);
+    const ok = q['питання'].every(p => (state.fields[p.id] || '').trim());
+    card.classList.toggle('complete', ok);
+    const a = $(`a[data-tq="${q.id}"]`); if (a) a.classList.toggle('complete', ok);
+  });
+}
+function refreshStats(){
+  const ids = openFields(), ans = ids.filter(id => (state.fields[id] || '').trim()).length;
+  const r = reqDone();
+  const rs = $('#route-stats');
+  if (rs) rs.innerHTML = `<div class="stat"><b>${r.done}/${r.total}</b><span>обов'язкове прочитано</span></div><div class="stat"><b>${ans}/${ids.length}</b><span>відповідей дано</span></div>`;
+  const a = $('#m-ans'); if (a){
+    a.textContent = ans + ' із ' + ids.length; $('#m-ans-bar').style.width = (ids.length ? 100 * ans / ids.length : 0) + '%';
+    $('#m-read').textContent = r.done + ' із ' + r.total; $('#m-read-bar').style.width = (r.total ? 100 * r.done / r.total : 0) + '%';
+  }
+}
+
+/* ---------- навігація ---------- */
+function show(){
+  let id = location.hash.slice(1);
+  if (id.startsWith('q-')){ go('blok', false); const el = document.getElementById(id); if (el) setTimeout(() => el.scrollIntoView(), 30); return; }
+  if (!VIEWS.includes(id)) id = 'marshrut';
+  go(id, false);
+}
+function go(id, push){
+  VIEWS.forEach(x => $('#v-' + x).classList.toggle('on', x === id));
+  $$('#nav button').forEach(b => b.setAttribute('aria-current', b.dataset.go === id ? 'page' : 'false'));
+  if (push !== false){ history.pushState(null, '', '#' + id); window.scrollTo({top:0}); }
+  if (id === 'cheklyst' || id === 'marshrut') syncChecks();
+  $$('#v-' + id + ' textarea').forEach(autosize);
+}
+$$('[data-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.go)));
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (a && !a.dataset.tq){ const id = a.getAttribute('href').slice(1); if (VIEWS.includes(id)){ e.preventDefault(); go(id); } }
+});
+addEventListener('popstate', show);
+
+function renderAll(){
+  renderRoute(); renderChecklist(); renderBlok(); renderSvidky(); renderTable(); renderZdaty();
+  syncChecks(); markCompletion(); refreshStats(); indicator();
+}
+$('#foot').innerHTML = `Керівник: ${esc(M['керівник'])}. Цитати Блока — за українським перекладом В. Шовкуна (Київ, 2001), у межах права цитування; повний текст — в «Ізборнику». Переклади Венетта й Фруассара зроблено для цього дослідження з оригіналів у суспільному надбанні.`;
+load(); renderAll(); show();
+})();
+</script>
+</body>
+</html>
